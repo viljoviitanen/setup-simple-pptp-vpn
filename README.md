@@ -26,6 +26,8 @@ Allow the following through the firewall ("security group")
 - TCP port 22 (SSH)
 - TCP port 1723
 
+> See the screenshot of the rules from EC2 www console at https://github.com/viljoviitanen/setup-simple-pptp-vpn/wiki/Amazon-EC2-firewall-security-group-instructions
+
 Common
 ------
 
