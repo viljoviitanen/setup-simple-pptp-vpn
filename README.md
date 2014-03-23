@@ -7,12 +7,17 @@ Setup Simple PPTP VPN server for Ubuntu and Debian
 > http://en.wikipedia.org/wiki/Point-to-Point_Tunneling_Protocol#Security
 > If you need security, consider using e.g. openvpn, you can setup a server
 > easily with https://github.com/viljoviitanen/setup-simple-openvpn
+> However, PPTP works out of the box on many operating systems,
+> including many Linux distributions, MacOS, Windows and Android
+> and it's easily good enough for evading country level IP blocks.
 
 Script has been tested on Amazon EC2: Ubuntu Server 12.04.3 LTS
 
 Digital Ocean: Ubuntu 12.04 LTS (Precise Pangolin), Debian 7 (Wheezy)
 
-Copyright 2013 Viljo Viitanen <viljo.viitanen@iki.fi>
+Rackspace: Ubuntu 12.04
+
+Copyright 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi>
 Licensed under GPL version 2 or any later version.
 
 INSTALLATION INSTRUCTIONS
