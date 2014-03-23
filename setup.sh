@@ -1,6 +1,6 @@
 #!/bin/sh
 #    Setup Simple PPTP VPN server for Ubuntu and Debian
-#    Copyright (C) 2013 Viljo Viitanen <viljo.viitanen@iki.fi>
+#    Copyright (C) 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi>
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,12 +18,15 @@
 #
 #    2013-11-06: initial version. Tested with Amazon EC2 Ubuntu 12.04 and 
 #                Digital Ocean Debian 7.0 and Ubuntu 12.04 images.
+#    2014-03-23: Added apt-get update.
 
 if [ `id -u` -ne 0 ] 
 then
   echo "Need root, try with sudo"
   exit 0
 fi
+
+apt-get update
 
 apt-get -y install pptpd || {
   echo "Could not install pptpd" 
