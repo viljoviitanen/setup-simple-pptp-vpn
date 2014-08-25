@@ -20,6 +20,34 @@
 #                Digital Ocean Debian 7.0 and Ubuntu 12.04 images.
 #    2014-03-23: Added apt-get update.
 
+printhelp() {
+
+echo "
+
+Usage: sh setup.sh [OPTION]
+
+If you are using custom password , Make sure its more than 8 characters. Otherwise it will generate random password for you. 
+
+If you trying set password only. It will generate Default user with Random password. 
+
+example: sudo bash setup.sh -u vpn -p mypass
+
+Use without parameter [ sudo bash setup.sh ] to use default username and Random password
+
+
+  -u,    --username             Enter the Username
+  -p,    --password             Enter the Password
+"
+}
+
+while [ "$1" != "" ]; do
+  case "$1" in
+    -u    | --username )             NAME=$2; shift 2 ;;
+    -p    | --password )             PASS=$2; shift 2 ;;
+    -h    | --help )            echo "$(printhelp)"; exit; shift; break ;;
+  esac
+done
+
 if [ `id -u` -ne 0 ] 
 then
   echo "Need root, try with sudo"
@@ -52,15 +80,26 @@ END
 sh /etc/rc.local
 
 #no liI10oO chars in password
-P1=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-P2=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-P3=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-PASS="$P1-$P2-$P3"
+
+LEN=$(echo ${#PASS})
+
+if [ -z "$PASS" ] || [ $LEN -lt 8 ] || [ -z "$NAME"]
+then
+   P1=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
+   P2=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
+   P3=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
+   PASS="$P1-$P2-$P3"
+fi
+
+if [ -z "$NAME" ]
+then
+   NAME="vpn"
+fi
 
 cat >/etc/ppp/chap-secrets <<END
 # Secrets for authentication using CHAP
 # client server secret IP addresses
-vpn pptpd $PASS *
+$NAME pptpd $PASS *
 END
 cat >/etc/pptpd.conf <<END
 option /etc/ppp/options.pptpd
@@ -97,7 +136,7 @@ else
   echo "Detected your server external ip address: $IP"
 fi
 echo   ""
-echo   "VPN username = vpn   password = $PASS"
+echo   "VPN username = $NAME   password = $PASS"
 echo   "============================================================"
 sleep 2
 
