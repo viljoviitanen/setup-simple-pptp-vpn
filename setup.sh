@@ -1,6 +1,6 @@
 #!/bin/sh
 #    Setup Simple PPTP VPN server for Ubuntu and Debian
-#    Copyright (C) 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi>
+#    Copyright (C) 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi> and contributors
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
