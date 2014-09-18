@@ -17,7 +17,7 @@ Digital Ocean: Ubuntu 12.04 LTS (Precise Pangolin), Debian 7 (Wheezy)
 
 Rackspace: Ubuntu 12.04
 
-Copyright 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi>
+Copyright 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi> and contributors.
 Licensed under GPL version 2 or any later version.
 
 INSTALLATION INSTRUCTIONS
@@ -64,3 +64,5 @@ long time (days or more), consider either restricting access to the ssh port on
 the server by ip addresses to the networks you use, if you know the addresses
 you are most likely to use or at least change ssh from port 22 to a random
 port.
+
+You can also specify you own username and password, run `sh setup.sh -h` for help.
