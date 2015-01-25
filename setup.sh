@@ -124,8 +124,13 @@ novjccomp
 nologfd
 END
 
+apt-get -y install wget || {
+  echo "Could not install wget, required to retrieve your IP address." 
+  exit 1
+}
+
 #find out external ip 
-IP=`wget -q -O - http://ipecho.net/plain`
+IP=`wget -q -O - http://api.ipify.org`
 
 if [ "x$IP" = "x" ]
 then
