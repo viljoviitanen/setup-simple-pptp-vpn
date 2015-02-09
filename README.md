@@ -13,7 +13,7 @@ Setup Simple PPTP VPN server for Ubuntu and Debian
 
 Script has been tested on Amazon EC2: Ubuntu Server 12.04.3 LTS
 
-Digital Ocean: Ubuntu 12.04 LTS (Precise Pangolin), Debian 7 (Wheezy)
+Digital Ocean: Ubuntu 12.04 LTS, Ubuntu 14.04 LTS, Debian 7 (Wheezy)
 
 Rackspace: Ubuntu 12.04
 
