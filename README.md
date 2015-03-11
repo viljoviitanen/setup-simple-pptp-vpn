@@ -11,13 +11,15 @@ Setup Simple PPTP VPN server for Ubuntu and Debian
 > including many Linux distributions, MacOS, Windows and Android
 > and it's easily good enough for evading country level IP blocks.
 
-Script has been tested on Amazon EC2: Ubuntu Server 12.04.3 LTS
+Script has been tested on:
 
-Digital Ocean: Ubuntu 12.04 LTS (Precise Pangolin), Debian 7 (Wheezy)
+Amazon EC2: Ubuntu Server 12.04.3 LTS, Ubuntu Server 14.04[.x] LTS (Trusty Tahr)
+
+DigitalOcean: Ubuntu 12.04 LTS (Precise Pangolin), Ubuntu 14.04[.x] LTS (Trusty Tahr), Debian 7 (Wheezy)
 
 Rackspace: Ubuntu 12.04
 
-Copyright 2013-2014 Viljo Viitanen <viljo.viitanen@iki.fi> and contributors.
+Copyright 2013-2015 Viljo Viitanen <viljo.viitanen@iki.fi> and contributors.
 Licensed under GPL version 2 or any later version.
 
 INSTALLATION INSTRUCTIONS
@@ -58,6 +60,8 @@ the vpn connection is active: https://developers.google.com/speed/public-dns/
 
 Only one vpn account is generated.
 To add more accounts, see the file /etc/ppp/chap-secrets
+
+Tool for adding more VPN easily is coming soon, stay tuned!
 
 If you keep the vpn server generated with this script on the internet for a
 long time (days or more), consider either restricting access to the ssh port on

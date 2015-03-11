@@ -30,21 +30,21 @@ If you are using custom password , Make sure its more than 8 characters. Otherwi
 
 If you trying set password only. It will generate Default user with Random password. 
 
-example: sudo bash setup.sh -u vpn -p mypass
+example: sudo bash setup.sh -u vpn -p
 
 Use without parameter [ sudo bash setup.sh ] to use default username and Random password
 
 
   -u,    --username             Enter the Username
-  -p,    --password             Enter the Password
+  -p,    --password             Enter the Password when prompted
 "
 }
 
 while [ "$1" != "" ]; do
   case "$1" in
     -u    | --username )             NAME=$2; shift 2 ;;
-    -p    | --password )             PASS=$2; shift 2 ;;
-    -h    | --help )            echo "$(printhelp)"; exit; shift; break ;;
+    -p    | --password )             stty_orig=`stty -g`; stty -echo; read -p "Enter preferred password: " PASS; stty $stty_orig; echo ""; break ;;
+    -h    | --help )                echo "$(printhelp)"; exit; shift; break ;;
   esac
 done
 
@@ -54,9 +54,11 @@ then
   exit 0
 fi
 
-apt-get update
+echo "Making sure apt-get is updated..."
+apt-get update > /dev/null
 
-apt-get -y install pptpd || {
+echo "Installing pptpd..."
+apt-get -y install pptpd > /dev/null || {
   echo "Could not install pptpd" 
   exit 1
 }
@@ -132,19 +134,51 @@ apt-get -y install wget || {
 #find out external ip 
 IP=`wget -q -O - http://api.ipify.org`
 
-if [ "x$IP" = "x" ]
-then
+service pptpd restart
+
+clear
+
+if [ "x$IP" = "x" ] ; then
+  NO_IP=true
   echo "============================================================"
   echo "  !!!  COULD NOT DETECT SERVER EXTERNAL IP ADDRESS  !!!"
+  echo "  !!!  Please manually find out your server's       !!!"
+  echo "  !!!  external IP address before connecting!       !!!"
 else
+  NO_IP=false
   echo "============================================================"
   echo "Detected your server external ip address: $IP"
 fi
 echo   ""
-echo   "VPN username = $NAME   password = $PASS"
+echo   "VPN username = $NAME   password = ********"
 echo   "============================================================"
-sleep 2
 
-service pptpd restart
+echo "Your VPN server password is hidden. Would you like to reveal it?"
+while true; do
+  read -p "" yn
+  case $yn in
+      [Yy]* ) clear; break;;
+      [Nn]* ) exit 0;;
+      * ) echo "Please answer with yes or no [y|n].";;
+  esac
+done
+
+if [ $NO_IP = "true" ] ; then 
+  echo "============================================================"
+  echo "  !!!  COULD NOT DETECT SERVER EXTERNAL IP ADDRESS  !!!"
+  echo "  !!!  Please manually find out your server's       !!!"
+  echo "  !!!  external IP address before connecting!       !!!"
+  echo ""
+  echo "VPN username = $NAME   password = $PASS"
+  echo "============================================================"
+else
+  echo "============================================================"
+  echo "Detected your server external ip address: $IP"
+  echo ""
+  echo "VPN username = $NAME   password = $PASS"
+  echo "============================================================"
+fi
+
+sleep 1
 
 exit 0
