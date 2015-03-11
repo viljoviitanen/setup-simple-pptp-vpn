@@ -15,7 +15,7 @@ Script has been tested on:
 
 Amazon EC2: Ubuntu Server 12.04.3 LTS, Ubuntu Server 14.04[.x] LTS (Trusty Tahr)
 
-DigitalOcean: Ubuntu 12.04 LTS (Precise Pangolin), Ubuntu 14.04[.x] LTS (Trusty Tahr), Debian 7 (Wheezy)
+DigitalOcean: Ubuntu 12.04[.x] LTS (Precise Pangolin), Ubuntu 14.04[.x] LTS (Trusty Tahr), Debian 7 (Wheezy)
 
 Rackspace: Ubuntu 12.04
 
